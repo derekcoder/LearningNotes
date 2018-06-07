@@ -1,6 +1,6 @@
 # The Note of Go Programming Language
 
-# Chapter 1
+# 1 入门
 
 # 2 程序结构
 
@@ -8,18 +8,21 @@
 
 Go语言中的25的关键字
 
-| :------- | :---------- | :----- | :-------- | :----- |
-| break    | default     | func   | interface | select |
-| case     | defer       | go     | map       | struct |
-| chan     | else        | goto   | package   | switch |
-| const    | fallthrough | if     | range     | type   |
-| continue | for         | import | return    | var    |
+```
+break     default      func    interface  select 
+case      defer        go      map        struct 
+chan      else         goto    package    switch 
+const     fallthrough  if      range      type   
+continue  for          import  return     var    
+```
 
 30多个预定义的名字
 
-| 内建常量 | true false iota nil |
-| 内建类型 | int int8 int16 int32 int64 uint uint8 uint16 uint32 uint64 uintptr float32 float64 complex128 complex64 bool byte rune string error |
-| 内建函数 | make len cap new append copy close delete complex real imag panic recover |
+```
+内建常量：true false iota nil 
+内建类型： int int8 int16 int32 int64 uint uint8 uint16 uint32 uint64 uintptr float32 float64 complex128 complex64 bool byte rune string error 
+内建函数： make len cap new append copy close delete complex real imag panic recover 
+```
 
 > 如果一个名字在函数内部定义，那么它的作用域就仅限于函数内部。如果是在函数外部定义，那么将在当前包的所有文件中有效。名字的开头字母的大小写决定了名字在包外的可见性。大写表示可以在包外被访问，小写则表示不能。包本身的名字一般用小写字母。
 
