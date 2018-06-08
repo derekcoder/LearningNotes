@@ -120,3 +120,21 @@ func f() *int {
     return &v
 }
 ```
+
+### 2.3.3 new函数
+
+表达式new(T)将创建一个T类型的匿名变量，初始化为零值，然后返回变量地址，类型为*T。
+
+```
+p := new(int)  // *int, 指向匿名的int变量
+fmt.Println(*p)  // "0"
+*p = 2  
+fmt.Println(*p)  // "2"
+```
+
+new是预定义的函数，不是关键字。所以我们可以使用new来作为变量名。
+```
+func delta(old, new int) int { return new - old }
+```
+
+
