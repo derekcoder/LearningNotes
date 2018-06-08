@@ -87,3 +87,36 @@ f, err := os.Open(name)
 f, err := os.Open(infile)
 f, err := os.Create(outfile)  // compile error: no new variables
 ```
+
+### 2.3.2 指针
+
+一个变量对应一个存储该变量值的内存空间。一个指针的值是另一个变量的地址。通过指针，我们可以直接读取或更新对应变量的值。
+
+> 不是每一个值都会有一个内存地址，但是每一个变量必然有对应的内存地址。
+
+```
+var x = 1   // int
+var p = &x  // *int: 指向int类型的指针
+// p指针指向变量x
+
+fmt.Println(*p)  // "1"
+
+*p = 2           // 等同于：x = 2
+fmt.Println(x)  // "2"
+```
+
+任何类型的指针的零值都是nil。如果 p != nil，那么表示p指向某个有效变量。指针之间可以测试是否相等，只有两个指针同时指向同一个变量或全部是nil时才相等。
+```
+var x, y int
+fmt.Println(&x == &x, &x == &y, &x == nil)  // "true false false"
+```
+
+```
+// v虽然是函数局部变量，但指针p引用了v，所以v变量依然有效，不会被释放
+var p = f()  
+
+func f() *int {
+    v := 1
+    return &v
+}
+```
