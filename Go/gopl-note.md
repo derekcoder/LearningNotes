@@ -181,3 +181,38 @@ v := 1
 v++
 v--
 ```
+
+### 2.4.1 元组赋值
+
+```
+i, j, k = 2, 3, 5
+f, err = os.Open("foo.txt")  // function call returns two values
+```
+
+交换值
+```
+x, y = y, x
+a[i], a[j] = a[j], a[i]
+```
+
+求最大公约数(GCD: Greatest Common Divisor)
+```
+func gcd(x, y int) int {
+    for y != 0 {
+        x, y = y, x%y
+    }
+    return x
+}
+```
+
+计算斐波那契数列（Fibonacci）的第N个数
+```
+func fib(n int) int {
+    x, y := 0, 1
+    for i := 0; i < n; i++ {
+        x, y = y, x+y
+    }
+    return x
+}
+```
+
