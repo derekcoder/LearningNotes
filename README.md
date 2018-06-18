@@ -4,7 +4,7 @@
 
 | Area | Note |
 | :---: | :--: |
-| 语言 | -- |
+| Language | -- |
 | App Architecture | -- |
 | Design Pattern | -- |
 | Data Structure & Algorithm | -- |

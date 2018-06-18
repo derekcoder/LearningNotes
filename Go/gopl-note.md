@@ -231,6 +231,11 @@ medals := []string{ "gold", "silver", "bronze" }
 
 ## 2.5 类型
 
+一个类型声明语言创建了一个新的类型名称，新类型和现有的类型具有相同的底层结构。
+```
+type 新类型名字 底层类型
+```
+
 ```
 package temoconv
 
@@ -248,4 +253,41 @@ const (
 func CToF(c Celsius) Fahrenheit { return Fahrenheit(c*9/5 + 32) }
 
 func FToC(f Fahrenheit) Celsius { return Celsius((f - 32) * 5 / 9) }
+```
+
+上面我们声明了两种类型：`Celsius`和`Fahrenheit`分别对应不同的温度单位。它们虽然都具有相同的底层类型`float64`，但是它们是不同的数据类型，因此它们不可用被相互比较或混在一个表达式运算。
+
+> `Celsius(t)`和`Fahrenheit(t)`是类型转换操作，它们并不是函数调用。
+> 对于每一个类型`T`，都有一个对应的类型转换操作`T(x)`，用于将x转为T类型。只有当两个类型的底层基础类型相同时，才允许这种转型操作，或者是两者都是指向相同底层结构的指针类型，这些转换只改变类型而不影响值本身。
+> 在任何情况下，运行时不会发生转换失败的错误。（错误只会发生在编译阶段）
+
+底层数据类型决定了内部结构和表达方式，也决定是否可以像底层类型一样对内置运算符的支持。这意味着，`Celsisus`和`Fahrenheit`类型的算术运算行为和底层的`float64`类型是一样的。
+```
+fmt.Printf("%g\n", BoilingC-FreezingC)  // 100
+bilingF := CToF(BoilingC)
+fmt.Printf("%g\n", boilingF-CToF(FreezingC))  // 180
+fmt.Printf("%g\n", boilingF-FreezingC)  // comile error: type mismatch
+```
+
+```
+var c Celsius
+var f Fahrenheit
+fmt.Println(c == 0)  // true
+fmt.Println(f >= 0)  // true
+fmt.Println(c == f)  // compile error: type mismatch
+fmt.Println(c == Celsisus(f))  // true
+```
+
+类型的方法集
+
+```
+func (c Celsisus) String() string { return fmt.Sprintf("%gºC", c) }
+
+c := FToC(212.0)
+fmt.Println(c.String())  // 100ºC
+fmt.Printf("%v\n", c)    // 100ºC
+fmt.Printf("%s\n", c)    // 100ºC
+fmt.Println(c)           // 100ºC
+fmt.Printf("%g\n", c)    // 100
+fmt.Println(float64(c))  // 100
 ```
