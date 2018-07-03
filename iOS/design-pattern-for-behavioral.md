@@ -34,7 +34,7 @@ final class MoneyPile {
         self.nextPile = nextPile
     }
     
-    public func canWithdraw(amount: Int) -> Bool {
+   	func canWithdraw(amount: Int) -> Bool {
         var amount = amount
         var quantity = self.quantity
         while amount >= self.value {
@@ -66,7 +66,7 @@ final class ATM {
         self.ten = ten
     }
     
-    public func canWithdraw(amount: Int) -> Bool {
+    func canWithdraw(amount: Int) -> Bool {
         return hundred.canWithdraw(amount: amount)
     }
 }
