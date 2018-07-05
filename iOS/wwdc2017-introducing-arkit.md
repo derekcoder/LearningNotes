@@ -342,7 +342,7 @@ func render(_: SCNSceneRender, didRemove: SCNNode, for: ARAnchor)
 
 `ARSKView`
 
-* Contains `ARSession1`
+* Contains `ARSession`
 
 * Draws captured image
 
