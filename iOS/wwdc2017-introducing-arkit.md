@@ -24,7 +24,7 @@
 
 * Configuration Classes
 
-  * ARSessionConfiguration -> ARWorldTrackingSessionConfiguration
+  * `ARSessionConfiguration` -> `ARWorldTrackingSessionConfiguration`
 
 * Enable/Disable Features
 
@@ -91,11 +91,11 @@ func session(_: ARSession, didFailWithError: Error)
 
 * Real-world position and orientation
 
-* ARSession add/remove
+* `ARSession` add/remove
 
-* ARFrame anchors
+* `ARFrame` anchors
 
-* ARSessionDelegate add/update/remove
+* `ARSessionDelegate` add/update/remove
 
 
 
@@ -149,7 +149,7 @@ mySession.run(configuration)
 
 ### Tracking State
 
-* Not Available -> Normal ------- > Limited -> Normal -----------
+* `Not Available` -> `Normal` ------- > `Limited` -> `Normal` -----------
 
   ```swift
   func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -184,19 +184,117 @@ func sessionInterruptionEnded(_ session: ARSession) {
 
 ## Scene Understanding
 
-
-
 ### Plane detection
+
+* Horizontal with respect to gravity
+
+* Runs over multiple frames
+
+* Aligned extent for surface
+
+* Plane merging
+
+  
+
+```swift
+// Enable plane detection on a session
+
+// Create a new world tracking configuration
+let configuration = ARWorldTrackingSessionConfiguration()
+
+// Enable plane detection
+configuration.planeDetection = .horizontal
+
+// Change configuration on currently running session
+mySession.run(configuration)
+```
+
+`ARPlaneAnchor`
+
+* Subclasss of `ARAnchor`
+
+* Transform
+
+* Extent
+
+* Center
+
+
+
+```swift
+// Called when a new plane was detected
+func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+    addPlaneGeometry(forAnchors: anchors)
+}
+
+// Called when a plane's transform or extent is updated
+func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+    updatePlaneGeometry(forAnchors: anchors)
+}
+
+// Called when a plane was removed as a result of a merge
+func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
+    removePlaneGeometry(forAnchors: anchors)
+}
+```
 
 
 
 ### Hit-testing
 
+* Intersect ray with real world
+
+* Uses scene information
+
+* Results sorted by distance
+
+* Hit-test types
+
+  * Existing plane using extent
+
+  * Existing plane
+
+  * Estimated plane
+
+  * Feature point
+
+
+
+```swift
+// Adding an ARAnchor based on hit-test
+let point = CGPoint(x: 0.5, y: 0.5)  // Image center
+
+let Perform hit-test on frame
+let results = frame.hitTest(point, types: [.existingPlane, ..estimatedHorizontalPlane])
+
+// Use the first result
+if let closestResult = results.first {
+    // Create an Anchor for it
+    let anchor = ARAnchor(transform: closestResult.worldTransform)
+  
+    // Add it to the session
+    session.add(anchor: anchor)
+}
+```
+
 
 
 ### Light estimation
 
+* Ambient intensity based on captured image
 
+* Defaults to 1000 lumen
+
+* Enabled by default
+
+
+
+```swift
+configuration.isLightEstimationEnabled = true
+
+// Get ambient intensity value
+let intensity = frame.lightEstimate?.ambientIntensity
+```
 
 ## Rendering
 
