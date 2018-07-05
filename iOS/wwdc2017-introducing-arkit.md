@@ -16,13 +16,9 @@
 
 ![18 AM](https://github.com/derekcoder/LearningNotes/blob/master/iOS/Resources/Screen%20Shot%202018-07-05%20at%2010.55.18%20AM.png)
 
-![48 AM](/Users/Derek/Developer/LearningNotes/iOS/Resources/Screen Shot 2018-07-05 at 10.58.48 AM.png)
+![48 AM](https://github.com/derekcoder/LearningNotes/blob/master/iOS/Resources/Screen%20Shot%202018-07-05%20at%2010.58.48%20AM.png)
 
-![13 AM](Resources/Screen Shot 2018-07-05 at 11.00.13 AM.png)
-
-
-
-
+![13 AM](https://github.com/derekcoder/LearningNotes/blob/master/iOS/Resources/Screen%20Shot%202018-07-05%20at%2011.00.13%20AM.png)
 
 ### ARSessionConfiguration
 
@@ -105,7 +101,7 @@ func session(_: ARSession, didFailWithError: Error)
 
 ### ARCamera
 
-![52 AM](Resources/Screen Shot 2018-07-05 at 11.18.52 AM.png)
+![52 AM](https://github.com/derekcoder/LearningNotes/blob/master/iOS/Resources/Screen%20Shot%202018-07-05%20at%2011.18.52%20AM.png)
 
 * Transform
 
