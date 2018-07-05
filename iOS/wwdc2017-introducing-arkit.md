@@ -14,7 +14,7 @@
 
 ## Get Started
 
-![18 AM](Resources/Screen Shot 2018-07-05 at 10.55.18 AM.png)
+![18 AM](https://github.com/derekcoder/LearningNotes/blob/master/iOS/Resources/Screen%20Shot%202018-07-05%20at%2010.55.18%20AM.png)
 
 ![48 AM](/Users/Derek/Developer/LearningNotes/iOS/Resources/Screen Shot 2018-07-05 at 10.58.48 AM.png)
 
