@@ -13,7 +13,7 @@ break     default      func    interface  select
 case      defer        go      map        struct 
 chan      else         goto    package    switch 
 const     fallthrough  if      range      type   
-continue  for          import  return     var    
+continue  for          import  return     var
 ```
 
 30多个预定义的名字
@@ -21,7 +21,7 @@ continue  for          import  return     var
 ```
 内建常量：true false iota nil 
 内建类型： int int8 int16 int32 int64 uint uint8 uint16 uint32 uint64 uintptr float32 float64 complex128 complex64 bool byte rune string error 
-内建函数： make len cap new append copy close delete complex real imag panic recover 
+内建函数： make len cap new append copy close delete complex real imag panic recover
 ```
 
 > 如果一个名字在函数内部定义，那么它的作用域就仅限于函数内部。如果是在函数外部定义，那么将在当前包的所有文件中有效。名字的开头字母的大小写决定了名字在包外的可见性。大写表示可以在包外被访问，小写则表示不能。包本身的名字一般用小写字母。
@@ -29,6 +29,7 @@ continue  for          import  return     var
 ## 2.2 声明
 
 Go语言主要有四种声明语句：
+
 * var - 变量
 * const - 常量
 * type - 类型
@@ -37,6 +38,7 @@ Go语言主要有四种声明语句：
 ## 2.3 变量
 
 变量声明语法如下：
+
 ```
 var 变量名字 类型 = 表达式
 ```
@@ -68,6 +70,7 @@ var f, err = os.Open(name)  // os.Open returns a file and an error
 在函数内部，有一种称为简短变量声明语句的形式可用于声明和初始化局部变量。
 
 语法格式如下：
+
 ```
 名字 := 表达式
 ```
@@ -106,6 +109,7 @@ fmt.Println(x)  // "2"
 ```
 
 任何类型的指针的零值都是nil。如果 p != nil，那么表示p指向某个有效变量。指针之间可以测试是否相等，只有两个指针同时指向同一个变量或全部是nil时才相等。
+
 ```
 var x, y int
 fmt.Println(&x == &x, &x == &y, &x == nil)  // "true false false"
@@ -133,6 +137,7 @@ fmt.Println(*p)  // "2"
 ```
 
 new是预定义的函数，不是关键字。所以我们可以使用new来作为变量名。
+
 ```
 func delta(old, new int) int { return new - old }
 ```
@@ -164,6 +169,7 @@ func g() {
 ## 2.4 赋值
 
 语法如下：
+
 ```
 变量 = 值
 ```
@@ -176,6 +182,7 @@ count[x] = count[x] * scale  // 数组，slice或map的元素赋值
 ```
 
 数值变量支持++递增和--递减语句（自增和自减是语言，而不是表达式，因此x = i++之类的表达式是错误的）。
+
 ```
 v := 1
 v++
@@ -190,12 +197,14 @@ f, err = os.Open("foo.txt")  // function call returns two values
 ```
 
 交换值
+
 ```
 x, y = y, x
 a[i], a[j] = a[j], a[i]
 ```
 
 求最大公约数(GCD: Greatest Common Divisor)
+
 ```
 func gcd(x, y int) int {
     for y != 0 {
@@ -206,6 +215,7 @@ func gcd(x, y int) int {
 ```
 
 计算斐波那契数列（Fibonacci）的第N个数
+
 ```
 func fib(n int) int {
     x, y := 0, 1
@@ -223,15 +233,17 @@ func fib(n int) int {
 * 函数调用会隐式地将调用参数的值赋值给函数的参数变量
 * 一个返回语句会隐式地将返回操作的值赋给结果变量
 * 一个复合类型的字面量也会产生赋值行为
-```
-medals := []string{ "gold", "silver", "bronze" }
-```
+
+  ```
+  medals := []string{ "gold", "silver", "bronze" }
+  ```
 
 > 可赋值性的规则：类型必须完全匹配， nil可以赋值给任何指针或引用类型的变量。
 
 ## 2.5 类型
 
 一个类型声明语言创建了一个新的类型名称，新类型和现有的类型具有相同的底层结构。
+
 ```
 type 新类型名字 底层类型
 ```
@@ -262,6 +274,7 @@ func FToC(f Fahrenheit) Celsius { return Celsius((f - 32) * 5 / 9) }
 > 在任何情况下，运行时不会发生转换失败的错误。（错误只会发生在编译阶段）
 
 底层数据类型决定了内部结构和表达方式，也决定是否可以像底层类型一样对内置运算符的支持。这意味着，`Celsisus`和`Fahrenheit`类型的算术运算行为和底层的`float64`类型是一样的。
+
 ```
 fmt.Printf("%g\n", BoilingC-FreezingC)  // 100
 bilingF := CToF(BoilingC)
@@ -291,3 +304,17 @@ fmt.Println(c)           // 100ºC
 fmt.Printf("%g\n", c)    // 100
 fmt.Println(float64(c))  // 100
 ```
+
+## 2.6 包和文件
+
+
+
+Go语言中的包和其它语言的库或模块的概念类似，目的都是为了支持模块化、封装、单独编译和代码复用。
+
+
+
+### 2.6.1 导入包
+
+
+
+### 2.6.2 包的初始化
