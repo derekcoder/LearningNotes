@@ -1,6 +1,6 @@
 # WWDC 2017 Introducing ARKit
 
-
+[Introducing ARKit: Augmented Reality for iOS](https://developer.apple.com/videos/play/wwdc2017/602/)
 
 ### ARKit
 
@@ -298,10 +298,129 @@ let intensity = frame.lightEstimate?.ambientIntensity
 
 ## Rendering
 
-### Easy integration
+### SceneKit
+
+`ARSCNView`:  `SCNView` -> `ARSCNView` --- `ARSession `
+
+* Draws captured image
+
+* Updates a `SCNCamera`
+
+* Updates scene lighting
+
+* Maps `SCNNode`s to `ARAnchor`s
+
+  
+
+```swift
+// ARSCNView
+func session(_: ARSession, didAdd: [ARAnchor])
+
+// ARSCNViewDelegate
+func render(_: SCNSceneRender, nodeFor: ARAnchor) -> SCNNode?
+func render(_: SCNSceneRender, didAdd: SCNNode, for: ARAnchor)
+```
+
+```swift
+// ARSCNView
+func session(_: ARSession, didUpdate: [ARAnchor])
+
+// ARSCNViewDelegate
+func render(_: SCNSceneRender, willUpdate: SCNNode, for: ARAnchor)
+func render(_: SCNSceneRender, didUpdate: SCNNode, for: ARAnchor)
+```
+
+```swift
+// ARSCNView
+func session(_:ARSession, didRemove: [ARAnchor])
+
+// ARSCNViewDelegate
+func render(_: SCNSceneRender, didRemove: SCNNode, for: ARAnchor)
+```
+
+### SpriteKit
+
+`ARSKView`
+
+* Contains `ARSession1`
+
+* Draws captured image
+
+* Maps `SKNode`s to `ARAnchor`s
+
+* Sprites are billboarded to physical locations
 
 
 
-### AR views
+### Metal
 
-### Custom rendering
+* Draw camera background
+
+* Update virtual camera
+
+* Update lighting
+
+* Update transforms for geometry
+
+
+
+#### Custom Rendering
+
+Accessing `ARFrame`
+
+
+
+Polling
+
+```swift
+if let frame = mySession.currentFrame {
+    if (frame.timestamp > _lastTimestamp) {
+        updateRenderer(frame)  // Update renderer with frame
+        _lastTimestamp = frame.timestamp
+    }
+}
+```
+
+Delegate
+
+```swift
+func session(_ session: ARSession, didUpdate frame: ARFrame) {
+    // Update renderer with frame
+    updateRenderer(frame)
+}
+```
+
+
+
+```swift
+func updateRenderer(_ frame: ARFrame) {
+    // Draw background camera image
+    drawCameraImage(withPixelBuffer: frame.capturedImage)
+  
+    // Update virtual camera
+    let viewMatrix = simd_inverse(frame.camera.transform)
+    let projectionMatrix = frame.camera.projectionMatrix
+    updateCamera(viewMatrix, projectionMatrix)
+  
+    // Update lighting
+    updateLighting(frame.lightEstimate?.ambientIntensity)
+  
+    // Update geometry based on anchors
+    drawGeometry(forAnchors: frame.anchors)
+}
+```
+
+
+
+#### Helper methods
+
+```swift
+// Get the frame's display transform for the given viewport size and orientation
+let transform = frame.displayTransform(withViewportSize: viewportSize, orientation: .portrait)
+
+// Get the camera's projection matrix for the given viewport size and orientation
+let projectionMatrix = camera.projectionMatrix(withViewportSize: viewportSize,
+                                                    orientation: .portrait,
+                                                          zNear: 0.001,
+                                                           zFar: 1000)
+```
