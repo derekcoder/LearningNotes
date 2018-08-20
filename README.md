@@ -4,7 +4,7 @@
 
 | Area | Note |
 | :---: | :--: |
-| Language | -- |
+| Language | [C语言学习笔记](https://github.com/derekcoder/LearningNotes/blob/master/iOS/C/c-note.md) |
 | App Architecture | -- |
 | Design Pattern | -- |
 | Data Structure & Algorithm | -- |
